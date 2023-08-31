@@ -7,31 +7,32 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="script/App.css">
     <title>My Interior lakberendezés</title>
 </head>
 <body>
-    <div class="scroll">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-    </div>
-    <header class="head">
+    <header class="head" id="header">
         <div class="top-icon">
             <p>Szudi Nikoletta</p>
         </div>
         <div class="title">
             <p>
-                Photographer
+                Lakberendező
             </p>
         </div>
         <div class="bottom-text">
             <p>
-                Lacus vestibulum sed arcu non odio euismod lacinia at quis. Sit amet aliquam id diam maecenas. Ac tortor dignissim convallis aenean et tortor.
+                Az elképzelésed a fő motivációnk. Hozzáadjuk még a kreativitásunkat, szakmai és műszaki
+tapasztalatainkat.
             </p>
         </div>
     </header>
+    <div class="scroll">
+        <div class="dot"><a class="active" href="#header">HOME</a></div>
+        <div class="dot"><a href="#contact">KONTAKT</a></div>
+    </div>
 <br>
 <br>
 <br>
@@ -39,21 +40,17 @@
 <br>
 <br>
 <br>
+
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-    <div class="contact">
+    <div id="contact" class="contact">
         <div class="title">
             <p>
-                Contact
+                Kontakt
             </p>
         </div>
         <div class="bottom-text-con con-2">
@@ -112,5 +109,47 @@
             </div>
         </div>
     </footer>
+    <script>
+
+        $(document).ready(function () {
+            $(document).on("scroll", onScroll);
+            
+            //smoothscroll
+            $('a[href^="#"]').on('click', function (e) {
+                e.preventDefault();
+                $(document).off("scroll");
+                
+                $('div').each(function () {
+                    $(this).removeClass('active');
+                })
+                $(this).addClass('active');
+              
+                var target = this.hash,
+                    menu = target;
+                $target = $(target);
+                $('html, body').stop().animate({
+                    'scrollTop': $target.offset().top+2
+                }, 500, 'swing', function () {
+                    window.location.hash = target;
+                    $(document).on("scroll", onScroll);
+                });
+            });
+        });
+        
+        function onScroll(event){
+            var scrollPos = $(document).scrollTop();
+            $('.scroll div a').each(function () {
+                var currLink = $(this);
+                var refElement = $(currLink.attr("href"));
+                if (refElement.position().top-400 <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+                    $('.scroll div a').removeClass("active");
+                    currLink.addClass("active");
+                }
+                else{
+                    currLink.removeClass("active");
+                }
+            });
+        }
+           </script>
 </body>
 </html>
