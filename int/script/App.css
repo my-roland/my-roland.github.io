@@ -103,6 +103,7 @@ body {
 .footer {
     border-top: rgba(63, 63, 63, 0.711) 2px solid;
     max-width: 960px;
+    margin: auto;
 }
 .f-icon a {
     color: #FFFFFF;
